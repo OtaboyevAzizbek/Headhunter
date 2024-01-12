@@ -17,4 +17,9 @@ public class City {
         this.cityName=cityName;
         this.countryId=countryId;
     }
+    public City(String cityName,int countryId,int cityId){
+        this.cityName=cityName;
+        this.countryId=countryId;
+        this.cityId=cityId;
+    }
 }

@@ -23,4 +23,12 @@ public class Company {
         this.cityId=cityId;
         this.description=description;
     }
+    public Company(String companyName,String companyTel,String companyEmail,int cityId,String description,int companyId){
+        this.companyName=companyName;
+        this.companyTel=companyTel;
+        this.companyEmail=companyEmail;
+        this.cityId=cityId;
+        this.description=description;
+        this.companyId=companyId;
+    }
 }

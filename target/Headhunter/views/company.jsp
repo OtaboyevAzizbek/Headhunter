@@ -23,6 +23,7 @@
         <th>City Name</th>
         <th>Country Name</th>
         <th>Description</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +36,55 @@
         <td><%=company.getCityName()%></td>
         <td><%=company.getCountryName()%></td>
         <td><%=company.getDescription()%></td>
+        <td>
+            <button type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-xx<%=company.getCompanyId()%>" class="btn btn-warning">Edit</button>
+            <a href="<%=request.getContextPath()%>/headhunter/delete_company/<%=company.getCompanyId()%>" class="btn btn-danger">Delete</a>
+        </td>
+        <%--Modal--%>
+        <div class="modal fade bd-example-modal-xx<%=company.getCompanyId()%>" aria-labelledby="exampleModalLabel6" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel6">Edit company</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="edit_company" method="post">
+                        <input type="hidden" name="companyId" value="<%=company.getCompanyId()%>">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleCompanyName2" class="form-label">Company Name</label>
+                                <input type="text" name="companyName" class="form-control" id="exampleCompanyName2" value="<%=company.getCompanyName()%>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleCompanyTel2" class="form-label">Company Tel</label>
+                                <input type="text" name="companyTel" class="form-control" id="exampleCompanyTel2" value="<%=company.getCompanyTel()%>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleCompanyEmail2" class="form-label">Company Email</label>
+                                <input type="text" name="companyEmail" class="form-control" id="exampleCompanyEmail2" value="<%=company.getCompanyEmail()%>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cityLable2" class="form-label">Country Name</label>
+                                <select name="cityId" id="cityLable2" class="form-control" required>
+                                    <option value="" selected>Select address</option>
+                                    <% for (City city : cityList) {%>
+                                    <option value="<%=city.getCityId()%>"><%=city.getCityName()%>,<%=city.getCountryName()%></option>
+                                    <%}%>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleCompanyDescription2" class="form-label">Description</label>
+                                <textarea name="description" class="form-control" rows="2" id="exampleCompanyDescription2"><%=company.getDescription()%></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </tr>
     <%}%>
     </tbody>

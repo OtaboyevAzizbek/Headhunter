@@ -19,6 +19,7 @@
         <th>City ID</th>
         <th>City Name</th>
         <th>Country Name</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +28,43 @@
         <td><%=city.getCityId()%></td>
         <td><%=city.getCityName()%></td>
         <td><%=city.getCountryName()%></td>
+        <td>
+            <button type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-x<%=city.getCityId()%>" class="btn btn-warning">Edit</button>
+            <a href="<%=request.getContextPath()%>/headhunter/delete_city/<%=city.getCityId()%>" class="btn btn-danger">Delete</a>
+        </td>
+        <%--Modal--%>
+        <div class="modal fade bd-example-modal-x<%=city.getCityId()%>" aria-labelledby="exampleModalLabel5" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel5">Edit city</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="edit_city" method="post">
+                        <input type="hidden" name="cityId" value="<%=city.getCityId()%>">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleCity2" class="form-label">City Name</label>
+                                <input type="text" name="name" class="form-control" id="exampleCity2" value="<%=city.getCityName()%>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="country2" class="form-label">Country Name</label>
+                                <select name="countryId" id="country2" class="form-control" required>
+                                    <option value="" selected>Select country</option>
+                                    <% for (Country country : countryList) {%>
+                                    <option value="<%=country.getCountryId()%>"><%=country.getCountryName()%></option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </tr>
     <%}%>
     </tbody>
@@ -48,6 +86,7 @@
                     <div class="mb-3">
                         <label for="country" class="form-label">Country Name</label>
                         <select name="countryId" id="country" class="form-control" required>
+                            <option value="" selected>Select country</option>
                             <% for (Country country : countryList) {%>
                             <option value="<%=country.getCountryId()%>"><%=country.getCountryName()%></option>
                             <%}%>
